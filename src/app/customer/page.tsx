@@ -1,12 +1,16 @@
+import ItemGrid from "./components/ItemGrid";
 import SearchBar from "./components/SearchBar";
 
 export default function CustomerPage() {
     return (
-        <div>
-            <div className="relative">
-                <div className="absolute w-1/2 inset-x-1/2 -translate-x-1/2 my-5">
+        <div className="p-5">
+            <div className="flex flex-col items-center my-5">
+                <div className="w-1/2">
                     <SearchBar />
                 </div>
+            </div>
+            <div>
+                <ItemGrid />
             </div>
         </div>
     );
