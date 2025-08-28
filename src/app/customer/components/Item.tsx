@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Item() {
     return (
-        <div className="outline rounded-xl p-3">
+        <div className="outline-2 rounded-xl p-3">
             <Image 
                 src="/box.svg"
                 alt="Box"
