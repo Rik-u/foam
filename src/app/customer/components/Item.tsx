@@ -10,7 +10,7 @@ export default function Item() {
                 height={100}
                 className="mx-auto"
             />
-            <p>FoamA</p>
+            <p>Foam A</p>
             <p>฿ 50</p>
             <button className="bg-blue-500 rounded-full px-3">Add to cart</button>
         </div>
