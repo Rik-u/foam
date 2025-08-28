@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { ItemType } from "../types";
 
-export default function Item() {
+export default function Item({id, title}: ItemType) {
     return (
         <div className="outline-2 rounded-xl p-3">
             <Image 
@@ -10,7 +11,7 @@ export default function Item() {
                 height={100}
                 className="mx-auto"
             />
-            <p>Foam A</p>
+            <p>{title}</p>
             <p>฿ 50</p>
             <button className="bg-blue-500 rounded-full px-3">Add to cart</button>
         </div>
