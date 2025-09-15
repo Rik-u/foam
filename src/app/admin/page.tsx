@@ -1,37 +1,15 @@
-'use client';
 import ItemGrid from "./components/ItemGrid";
-//Temp
-import { useState , useEffect } from "react";
-import { ItemType } from "./types";
+import { getItems } from "@/lib/db/items";
 
-export default function AdminPage() {
-    //Temp Local array for prototype
-    const [items, setItems] = useState<ItemType[]>(() => {
-        if (typeof window === "undefined") return []; // SSR safety
-        const saved = localStorage.getItem("items");
-        return saved ? JSON.parse(saved) : [];
-    });
+import { ItemType } from "@/types/item";
 
-    useEffect(() => {
-        localStorage.setItem("items", JSON.stringify(items));
-    }, [items]);
-
-    //Temp function to add item
-    const addItem = () => {
-        const newId = Date.now()
-        setItems([...items, { id: newId, title: `Item ${newId}` }]);
-    };
-    //Temp delete
-    const deleteItem = (id: number) => {
-        const updatedItems = items.filter(item => item.id !== id);
-        setItems(updatedItems);
-        localStorage.setItem("items", JSON.stringify(updatedItems)); // persist
-    }
+export default async function AdminPage() {
+    const items = await getItems();
 
     return (
         <div className="p-5">
             <div>
-                <ItemGrid items={items} onClickAdd={addItem} onClickDelete={deleteItem}/>
+                <ItemGrid initialItems={items} />
             </div>
         </div>
     );
