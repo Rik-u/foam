@@ -3,7 +3,7 @@
 import ItemAdd from "./ItemAdd";
 import Item from "./Item";
 import AddItemPopup from "./AddItemPopup";
-import { addItem, deleteItem } from "@/lib/db/items";
+import { addItem, deleteItem } from "@/services/database/ItemsDatabaseController";
 import { ItemType } from "@/types/item";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase/client";
@@ -155,4 +155,4 @@ export default function ItemGrid({ initialItems }: { initialItems: ItemType[] })
             </AddItemPopup>
         </div>
     );
-}
+}   
