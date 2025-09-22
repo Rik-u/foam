@@ -3,8 +3,8 @@ import type { ItemType } from '@/types/item'
 import { Item } from '@/models/Item';
 
 //Add new item
-export async function addItem(item: Omit<ItemType, 'item_id'>): Promise<ItemType> {
-  const { data, error } = await supabase.from('items').insert(item).single();
+export async function addItem(item: Omit<Item, 'item_id'>): Promise<ItemType> {
+  const { data, error } = await supabase.from('items').insert({ ...item }).single();
   if (error) throw error;
   return data;
 }
