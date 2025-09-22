@@ -8,7 +8,7 @@ export default async function AdminPage() {
 
     const handleDelete = async (id : number) => {
         try {
-            await ItemsDatabase.deleteItem(id);
+            await ItemsDatabase.deleteItemById(id);
         } catch (error) {
             console.error("Failed to delete item:", error);
         }
