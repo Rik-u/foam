@@ -15,7 +15,7 @@ export default async function AdminPage() {
         }
     };
 
-    const handleAddItem = async () => {
+    const handleAddItem = async (item : Item) => {
         try {
             await ItemsDatabase.addItem(item);
         } catch (error) {
