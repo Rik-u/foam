@@ -13,3 +13,11 @@ export interface ItemGridProps {
 export interface ItemAddButtonProps {
     onClickAdd: () => void;
 }
+
+export type Item = {
+    id: number,
+    item_name: string,
+    current_price: number,
+    size: string,
+    stock_quantity: number
+};

@@ -1,15 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-
-type Item = {
-    id: number,
-    item_name: string,
-    current_price: number,
-    size: string,
-    stock_quantity: number
-};
+import { Item } from "@/app/admin/types"
+import ItemList from "../components/ItemList";
 
 export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
@@ -34,23 +27,8 @@ export default function ItemManagementForm() {
     }
 
     return (
-        <div className="grid grid-cols-5 gap-3">
-            {list.map(item => (
-                <div key={item.id} className="outline-2 rounded-xl p-3">
-                    <Image 
-                        src="/box.svg"
-                        alt="Box"
-                        width={100}
-                        height={100}
-                        className="mx-auto"
-                    />
-                    <p>ID : {item.id}</p>
-                    <p>{item.item_name}</p>
-                    <p>{item.current_price} ฿</p>
-                    <p>Size : {item.size}</p>
-                    <p>Stock : {item.stock_quantity}</p>
-                </div>
-            ))}
+        <div>
+            <ItemList list={list}/>
         </div>
     );
 }
