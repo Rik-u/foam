@@ -1,10 +1,10 @@
 import Sidebar from "./components/Sidebar";
 
-export default function AdminLayout({ children } : { children : React.ReactNode; }) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
-            <Sidebar /> 
-            <main>
+        <div className="flex h-screen">
+            <Sidebar />
+            <main className="flex-1 p-4 overflow-auto">
                 {children}
             </main>
         </div>

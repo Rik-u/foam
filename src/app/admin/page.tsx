@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
-    redirect("/admin/item-management");
+    redirect("/admin/ItemManagement");
 }
