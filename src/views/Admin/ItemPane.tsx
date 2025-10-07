@@ -3,7 +3,7 @@
 import { Item } from "@/models/Item";
 import Image from "next/image";
 
-export default function ItemPane({ item, onClickDelete }: { item: Item; onClickDelete: (id: number) => void}) {
+export default function ItemPane({ item, onClickDelete }: { item: Item; onClickDelete: (id: number | null) => void}) {
     return (
         <div className="flex flex-col outline-2 rounded-xl p-3">
             <Image 
