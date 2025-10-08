@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Item } from "@/app/admin/types"
 import ItemList from "../components/ItemList";
+import TopBar from "../components/TopBar";
 
 export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
@@ -28,6 +29,7 @@ export default function ItemManagementForm() {
 
     return (
         <div>
+            <TopBar />
             <ItemList list={list}/>
         </div>
     );
