@@ -2,7 +2,7 @@
 
 import ItemAdd from "./ItemAdd";
 import Item from "./Item";
-import AddItemPopup from "./AddItemPopup";
+import AddItemPopup from "./AddItemPopupOld";
 import { addItem, deleteItemById } from "@/services/database/ItemsDatabaseController";
 import { ItemType } from "@/types/item";
 import { useEffect, useState } from "react";

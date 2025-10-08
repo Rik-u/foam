@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { ItemProps } from "../types";
+import { ItemProps } from "../../types";
 
-export default function Item({id, title, onClickDelete}: ItemProps) {
+export default function Item({ id, title, onClickDelete }: ItemProps) {
     return (
         <div className="outline-2 rounded-xl p-3 h-55">
-            <Image 
+            <Image
                 src="/box.svg"
                 alt="Box"
                 width={100}
