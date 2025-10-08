@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode } from "react";
-import { X } from "lucide-react";
 
 export default function AddItemPopup({
   isOpen,
