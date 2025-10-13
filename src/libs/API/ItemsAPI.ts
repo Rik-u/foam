@@ -19,3 +19,7 @@ export async function searchItem(query : string) {
         const data = await res.json();
         return data;
     }
+
+export async function deleteItemById() {
+    
+}
