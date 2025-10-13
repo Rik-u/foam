@@ -1,5 +1,5 @@
 'use client';
-
+//BUG Size selection bugged
 import { useState } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
