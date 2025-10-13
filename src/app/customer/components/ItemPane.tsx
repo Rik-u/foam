@@ -1,7 +1,7 @@
+import { Item } from "@/models/Item";
 import Image from "next/image";
-import { ItemType } from "../types";
 
-export default function Item({id, title}: ItemType) {
+export default function ItemPane({ item } : {item : Item}) {
     return (
         <div className="outline-2 rounded-xl p-3">
             <Image 
@@ -11,8 +11,8 @@ export default function Item({id, title}: ItemType) {
                 height={100}
                 className="mx-auto"
             />
-            <p>{title}</p>
-            <p>฿ 50</p>
+            <p>{item.item_name}</p>
+            <p>{item.current_price}</p>
             <button className="bg-blue-500 rounded-full px-3">Add to cart</button>
         </div>
     );
