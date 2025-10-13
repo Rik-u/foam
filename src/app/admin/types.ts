@@ -1,7 +1,4 @@
-export interface ItemType {
-    id : number;
-    title : string;
-}
+import type { ItemType } from "@/types/item";
 
 export interface ItemProps {
     id: number;
@@ -10,9 +7,7 @@ export interface ItemProps {
 }
 
 export interface ItemGridProps {
-    items: ItemType[];
-    onClickAdd: () => void;
-    onClickDelete: (id: number) => void;
+    items: ItemType[]
 }
 
 export interface ItemAddButtonProps {
