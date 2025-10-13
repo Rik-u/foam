@@ -8,20 +8,38 @@ export default function Sidebar() {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(true);
 
-    const goTo = (path : string) => {
+    const goTo = (path: string) => {
         router.push(`/admin/${path}`);
     };
 
     return (
-        <div className={`flex flex-col ${collapsed ? 'w-16' : 'w-1/6 bg-blue-400'} h-screen `}>
-            <div className="flex justify-end my-4 mr-4">
-                <Menu onClick={() => setCollapsed(prev => !prev)} className="hover:border-2"/>
-            </div>
+        <div>
             
-            <div className={`w-full items-center ${collapsed ? 'hidden' : 'flex'}`}>
-                <div className="flex flex-col w-full text-center">
-                    <button onClick={() => goTo('ItemManagement')} className="hover:bg-blue-500 p-1">Items Management</button>
-                    <button onClick={() => goTo('Test')} className="hover:bg-blue-500 p-1">Test</button>
+            <div className="fixed top-4 left-4 z-50">
+                <Menu
+                    onClick={() => setCollapsed(prev => !prev)}
+                    className="hover:border-2 cursor-pointer"
+                />
+            </div>
+
+            
+            <div
+                className={`fixed top-0 left-0 h-screen bg-blue-400 transition-all duration-300
+                ${collapsed ? '-translate-x-full' : 'translate-x-0 w-1/6'}`}
+            >
+                <div className="mt-16 flex flex-col w-full text-center">
+                    <button
+                        onClick={() => goTo('ItemManagement')}
+                        className="hover:bg-blue-500 p-1 cursor-pointer"
+                    >
+                        Items Management
+                    </button>
+                    <button
+                        onClick={() => goTo('Test')}
+                        className="hover:bg-blue-500 p-1 cursor-pointer"
+                    >
+                        Test
+                    </button>
                 </div>
             </div>
         </div>

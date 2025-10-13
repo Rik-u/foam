@@ -1,38 +1,77 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
+import { useState } from "react";
+import { X } from "lucide-react";
+import { Item } from "@/app/admin/types"
 
-export default function AddItemPopup({
-  isOpen,
-  onClose,
-  children,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
-}) {
-  if (!isOpen) return null;
+export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open } : { onCloseNewItemPopup: () => void; onClickAddItem: (formData : Omit<Item, "id">) => void ;open : boolean; }) {
+    const [formData, setFormData] = useState<Omit<Item, "id">>({
+        item_name: '',
+        current_price: 0,
+        size: '',
+        stock_quantity: 0
+    })
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Dimmed background */}
-      <div
-        className="absolute inset-0 bg-black/50 "
-        onClick={onClose} // Close when clicking outside
-      />
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
-      {/* Modal content */}
-      <div className="relative bg-white rounded-xl shadow-lg p-6 w-96">
-        {children}
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        onClickAddItem(formData);
+    }
 
-        {/* Close button */}
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-          onClick={onClose}
-        >
-          ✕
-        </button>
-      </div>
-    </div>
-  );
+    return (
+        <div className={`${open ? 'fixed inset-0 z-50 flex items-center justify-center bg-black/50' : 'hidden'}`}>
+            <div className="flex flex-col bg-white p-6 rounded shadow-lg">
+                <div className="flex justify-end">
+                    <button onClick={onCloseNewItemPopup} className="cursor-pointer"><X /></button>
+                </div>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
+                    <input 
+                            type="text"
+                            name="item_name"
+                            value={formData?.item_name}
+                            onChange={handleChange}
+                            placeholder="Item Name"
+                            className="border rounded px-3 py-2"
+                            required
+                        />
+
+                    <div className="flex gap-1">
+                        <input
+                            type="number"
+                            name="current_price"
+                            value={formData?.current_price}
+                            onChange={handleChange}
+                            placeholder="Price"
+                            className="border rounded px-3 py-2 w-20"
+                            required 
+                        />
+
+                        <select
+                            className="border rounded px-3 py-2 grow">
+                            <option value={"M"}>M</option>
+                        </select>
+
+                        <input
+                            type="number"
+                            name="stock_quantity"
+                            value={formData?.stock_quantity}
+                            onChange={handleChange}
+                            placeholder="Stock"
+                            className="border rounded px-3 py-2 w-20"
+                            required
+                        />
+                    </div>
+
+                        <button type="submit" className="bg-green-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Add Item</button>
+                </form>
+            </div>
+        </div>
+    );
 }
