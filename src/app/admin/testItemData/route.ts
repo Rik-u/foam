@@ -6,13 +6,29 @@ const testItemData = [
         { id: 3, item_name: "Box C", current_price: 30, size: "L", stock_quantity: 30 },
     ];
 
+var lastId = 3;
+
 export async function GET() {
     return NextResponse.json(testItemData);
 }
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const newItem = { id: testItemData[testItemData.length - 1].id + 1, ...body };
+    const newItem = { id: lastId + 1, ...body };
     testItemData.push(newItem);
+    lastId = lastId + 1;
     return NextResponse.json(newItem)
+}
+
+export async function PUT(req: NextRequest) {
+    const updatedItem = await req.json(); // Expect full Item with id
+    const index = testItemData.findIndex(i => i.id === updatedItem.id);
+
+    if (index === -1) {
+        return NextResponse.json({ error: "Item not found" }, { status: 404 });
+    }
+
+    testItemData[index] = updatedItem;
+
+    return NextResponse.json(testItemData[index]);
 }
