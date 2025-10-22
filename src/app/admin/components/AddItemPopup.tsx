@@ -1,5 +1,5 @@
 'use client';
-//BUG Size selection bugged
+
 import { useState } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
@@ -12,7 +12,7 @@ export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open
         stock_quantity: 0
     })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -32,6 +32,9 @@ export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open
                     <button onClick={onCloseNewItemPopup} className="cursor-pointer"><X /></button>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
+                    <label htmlFor="item_name" className="text-sm font-medium text-gray-700">
+                        Item Name
+                    </label>
                     <input 
                             type="text"
                             name="item_name"
@@ -43,30 +46,53 @@ export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open
                         />
 
                     <div className="flex gap-1">
-                        <input
-                            type="number"
-                            name="current_price"
-                            value={formData?.current_price}
-                            onChange={handleChange}
-                            placeholder="Price"
-                            className="border rounded px-3 py-2 w-20"
-                            required 
-                        />
+                        <div className="flex flex-col">
+                            <label htmlFor="current_price" className="text-sm font-medium text-gray-700">
+                                Price
+                            </label>
+                            <input
+                                type="number"
+                                name="current_price"
+                                value={formData?.current_price}
+                                onChange={handleChange}
+                                placeholder="Price"
+                                className="border rounded px-3 py-2 w-20"
+                                required 
+                            />
+                        </div>
 
-                        <select
-                            className="border rounded px-3 py-2 grow">
-                            <option value={"M"}>M</option>
-                        </select>
+                        <div className="flex flex-col">
+                            <label htmlFor="size" className="text-sm font-medium text-gray-700">
+                                Size
+                            </label>
+                            <select 
+                                className="border rounded px-3 py-2 grow"
+                                name="size"
+                                value={formData?.size}
+                                onChange={handleChange}
+                                >
+                                <option value="">Select size</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                        </div>
 
-                        <input
-                            type="number"
-                            name="stock_quantity"
-                            value={formData?.stock_quantity}
-                            onChange={handleChange}
-                            placeholder="Stock"
-                            className="border rounded px-3 py-2 w-20"
-                            required
-                        />
+                        <div className="flex flex-col">
+                            <label htmlFor="stock_quantity" className="text-sm font-medium text-gray-700">
+                                Stock
+                            </label>
+                            <input
+                                type="number"
+                                name="stock_quantity"
+                                value={formData?.stock_quantity}
+                                onChange={handleChange}
+                                placeholder="Stock"
+                                className="border rounded px-3 py-2 w-20"
+                                required
+                            />
+                        </div>
                     </div>
 
                         <button type="submit" className="bg-green-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Add Item</button>
