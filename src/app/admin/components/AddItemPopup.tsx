@@ -9,7 +9,8 @@ export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open
         item_name: '',
         current_price: 0,
         size: '',
-        stock_quantity: 0
+        stock_quantity: 0,
+        status: "Active"
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

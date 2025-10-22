@@ -19,7 +19,8 @@ export default function ItemManagementForm() {
         item_name: "",        
         current_price: 0,      
         size: "",               
-        stock_quantity: 0
+        stock_quantity: 0,
+        status: ""
     });
 
     useEffect(() => {

@@ -31,6 +31,7 @@ export default function ItemDetailPopup({ open, item, onCloseItemDetailPopup, on
                     <button onClick={onCloseItemDetailPopup} className="cursor-pointer"><X /></button>
                 </div>
                 <h1>ID : {item.id}</h1>
+                <h1>Status : {item.status}</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-2">
                     <label htmlFor="item_name" className="text-sm font-medium text-gray-700">
                         Item Name
@@ -95,7 +96,10 @@ export default function ItemDetailPopup({ open, item, onCloseItemDetailPopup, on
                         </div>
                     </div>
 
-                    <button type="submit" className="bg-green-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Update Item</button>
+                    <div className="flex gap-2">
+                        <button type="submit" className="flex-1 bg-green-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Update</button>
+                        <button type="submit" className="flex-1 bg-red-500 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Remove</button>
+                    </div>     
                 </form>
             </div>
         </div>

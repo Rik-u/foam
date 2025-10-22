@@ -18,6 +18,7 @@ export default function ItemList({ list, onClickItem } : { list : Item[]; onClic
                     <p>{item.current_price} ฿</p>
                     <p>Size : {item.size}</p>
                     <p>Stock : {item.stock_quantity}</p>
+                    <p>Status : {item.status}</p>
                 </div>
             ))}
         </div>
