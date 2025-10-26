@@ -20,6 +20,17 @@ export async function searchItem(query : string) {
         return data;
     }
 
+export async function updateItem(item: Item) {
+    const res = await fetch("http://localhost:3000/admin/testItemData", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item),
+    });
+
+    const data = await res.json();
+    return data;
+}
+
 export async function deleteItemById() {
     
 }

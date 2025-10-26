@@ -1,5 +1,5 @@
 import { supabase } from '@/utils/supabase/client'
-import type { ItemType } from '@/types/item' 
+import type { ItemType } from '@/types/Item'
 import { Item } from '@/models/Item';
 
 //Add new item
@@ -24,12 +24,12 @@ export async function getItemById(id: number): Promise<ItemType> {
 }
 
 //Delete by id
-export async function deleteItemById(id : number): Promise<void> {
-    const { error } = await supabase.from('items').delete().eq('item_id', id);
-    if (error) throw error;
+export async function deleteItemById(id: number): Promise<void> {
+  const { error } = await supabase.from('items').delete().eq('item_id', id);
+  if (error) throw error;
 }
 
-export async function updateItemById(item : Item): Promise<void> {
+export async function updateItemById(item: Item): Promise<void> {
   const { error } = await supabase.from('items').update({ ...item }).eq('item_id', item.item_id);
-  if (error) throw error; 
+  if (error) throw error;
 }

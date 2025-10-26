@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { Item } from "@/app/admin/types"
 
-export default function ItemList({ list } : { list : Item[] }) {
+export default function ItemList({ list, onClickItem } : { list : Item[]; onClickItem : (id : number) => void; }) {
     return (
         <div className="grid grid-cols-5 gap-3 m-4">
             {list.map(item => (
-                <div key={item.id} className="outline-2 rounded-xl p-3">
+                <div key={item.id} className="outline-2 rounded-xl p-3" onClick={() => onClickItem(item.id)}>
                     <Image 
                         src="/box.svg"
                         alt="Box"
@@ -18,6 +18,7 @@ export default function ItemList({ list } : { list : Item[] }) {
                     <p>{item.current_price} ฿</p>
                     <p>Size : {item.size}</p>
                     <p>Stock : {item.stock_quantity}</p>
+                    <p>Status : {item.status}</p>
                 </div>
             ))}
         </div>
