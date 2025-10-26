@@ -4,7 +4,13 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
 
-export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open } : { onCloseNewItemPopup: () => void; onClickAddItem: (formData : Omit<Item, "id">) => void ;open : boolean; }) {
+export default function AddItemPopup({ 
+    onCloseNewItemPopup, 
+    onClickAddItem
+} : { 
+    onCloseNewItemPopup: () => void; 
+    onClickAddItem: (formData : Omit<Item, "id">) => void ;
+} ) {
     const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "id">>({
         item_name: '',
         current_price: 0,
@@ -27,7 +33,7 @@ export default function AddItemPopup({ onCloseNewItemPopup, onClickAddItem, open
     }
 
     return (
-        <div className={`${open ? 'fixed inset-0 z-50 flex items-center justify-center bg-black/50' : 'hidden'}`}>
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/50'>
             <div className="flex flex-col bg-white p-6 rounded shadow-lg">
                 <div className="flex justify-end">
                     <button onClick={onCloseNewItemPopup} className="cursor-pointer"><X /></button>

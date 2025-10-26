@@ -4,12 +4,29 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { Item } from "@/app/admin/types"
 
-export default function ItemDetailPopup({ open, item, onCloseItemDetailPopup, onClickUpdateItem }: { open: boolean; item: Item; onCloseItemDetailPopup: () => void; onClickUpdateItem: (formData: Item) => void; }) {
+export default function ItemDetailPopup({ 
+        item, 
+        onCloseItemDetailPopup, 
+        onOpenItemDiscontinueConfirmPopup, 
+        onClickUpdateItem,
+        setDiscontinueAction
+    }: { 
+        item: Item; 
+        onCloseItemDetailPopup : () => void; 
+        onOpenItemDiscontinueConfirmPopup : () => void; 
+        onClickUpdateItem : (formData: Item) => void; 
+        setDiscontinueAction : React.Dispatch<React.SetStateAction<() => void>>;
+    }) {
+        
     const [ItemDetailFormData, setItemDetailFormData] = useState<Item>(item)
 
     useEffect(() => {
         setItemDetailFormData(item);
     }, [item]);
+
+    useEffect(() => {
+        setDiscontinueAction(() => handleRemove);
+    }, [item])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -24,8 +41,14 @@ export default function ItemDetailPopup({ open, item, onCloseItemDetailPopup, on
         onClickUpdateItem(ItemDetailFormData);
     }
 
+    const handleRemove = () => {
+        const updatedItem = { ...ItemDetailFormData, status: "Discontinued"};
+        setItemDetailFormData(updatedItem)
+        onClickUpdateItem(updatedItem);
+    }
+
     return (
-        <div className={`${open ? 'fixed inset-0 z-50 flex items-center justify-center bg-black/50' : 'hidden'}`}>
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/50'>
             <div className="flex flex-col bg-white p-6 rounded shadow-lg">
                 <div className="flex justify-end">
                     <button onClick={onCloseItemDetailPopup} className="cursor-pointer"><X /></button>
@@ -96,9 +119,10 @@ export default function ItemDetailPopup({ open, item, onCloseItemDetailPopup, on
                         </div>
                     </div>
 
+                    {/*TODO Confirmation to remove*/}
                     <div className="flex gap-2">
                         <button type="submit" className="flex-1 bg-green-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Update</button>
-                        <button type="submit" className="flex-1 bg-red-500 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Remove</button>
+                        <button type="button" className="flex-1 bg-red-500 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-red-600" onClick={() => { onCloseItemDetailPopup(); onOpenItemDiscontinueConfirmPopup(); }}>Remove</button>
                     </div>     
                 </form>
             </div>

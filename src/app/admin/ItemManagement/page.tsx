@@ -7,13 +7,11 @@ import { getItems, postItem, searchItem, updateItem } from "@/libs/API/ItemsAPI"
 
 import ItemList from "../components/ItemList";
 import TopBar from "../components/TopBar";
-import AddItemPopup from "../components/AddItemPopup";
-import ItemDetailPopup from "../components/ItemDetailPopup";
+import Popup from "../components/Popup";
 
 export default function ItemManagementForm() {
     const [list, setList] = useState<Item[]>([]);
-    const [isAddItemPopupOpen, setIsAddItemPopupOpen] = useState(false);
-    const [isItemDetailPopupOpen, setIsItemDetailPopupOpen] = useState(false)
+    const [activePopup, setActivePopup] = useState<"DETAIL" | "CONFIRM" | "ADD" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({
         id: 0,                 
         item_name: "",        
@@ -47,36 +45,36 @@ export default function ItemManagementForm() {
         return false;
     }
 
-    const openNewItemPopup = () => {
-        setIsAddItemPopupOpen(true);
-    }
-
-    const closeNewItemPopup = () => {
-        setIsAddItemPopupOpen(false);
-    }
-
-    const openItemDetailPopup = (id : number) => {
+    const getItem = (id : number) => {
         const item = list.find(i => i.id === id);
         setSelectedItem(item!);
-        setIsItemDetailPopupOpen(true);
     }
 
-    const closeItemDetailPopup = () => {
-        setIsItemDetailPopupOpen(false);
+    const handleClosePopup = () => {
+        setActivePopup(null);
+    }
+
+    const handleOpenItemDetailPopup = (id : number) => {
+        getItem(id);
+        setActivePopup("DETAIL");
+    }
+
+    const handleOpenAddItemPopup = () => {
+        setActivePopup("ADD");
     }
 
     const createItem = async (item : Omit<Item, "id">) => {
-        postItem(item);
-        closeNewItemPopup();
+        await postItem(item);
         const newList = await getItems();
         displayList(newList);
+        handleClosePopup();
     }
 
     const updateItemDetail = async (item : Item) => {
-        updateItem(item);
+        await updateItem(item);
         const newList = await getItems();
         displayList(newList);
-        closeItemDetailPopup();
+        handleClosePopup();
     }
 
     const search = async (query : string) => {
@@ -89,19 +87,17 @@ export default function ItemManagementForm() {
 
     return (
         <div>
-            <TopBar onSearch={search} onOpenNewItemPopup={openNewItemPopup}/>
-            <ItemList list={list} onClickItem={openItemDetailPopup}/>
-            <AddItemPopup 
-                open={isAddItemPopupOpen} 
-                onCloseNewItemPopup={closeNewItemPopup} 
-                onClickAddItem={createItem}
-            />
-            <ItemDetailPopup 
-                open={isItemDetailPopupOpen}    
-                onCloseItemDetailPopup={closeItemDetailPopup} 
-                onClickUpdateItem={updateItemDetail} 
+            <TopBar onSearch={search} onOpenNewItemPopup={handleOpenAddItemPopup}/>
+            <ItemList list={list} onClickItem={handleOpenItemDetailPopup}/>
+            <Popup
+                activePopup={activePopup}
                 item={selectedItem}
-                />
+                onClose={handleClosePopup}
+                onAddItem={createItem}
+                onUpdateItem={updateItemDetail}
+                onOpenConfirmPopup={() => setActivePopup("CONFIRM")}
+                onOpenLastItemDetailPopup={() => setActivePopup("DETAIL")}
+            />
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import type { ItemType } from "@/types/item";
+import type { ItemType } from "@/types/Item";
 
 export interface ItemProps {
     id: number;
@@ -15,11 +15,11 @@ export interface ItemAddButtonProps {
 }
 
 //TODO Add reserve quantity
-export type Item = {
+export interface Item {
     id: number,
     item_name: string,
     current_price: number,
     size: string,
     stock_quantity: number
-    status : string
+    status: string
 };

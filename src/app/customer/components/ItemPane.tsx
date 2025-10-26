@@ -1,4 +1,6 @@
-import { Item } from "@/models/Item";
+'use client';
+
+import Item from "@/types/Item";
 import Image from "next/image";
 
 export default function ItemPane({ item } : {item : Item}) {
@@ -12,8 +14,8 @@ export default function ItemPane({ item } : {item : Item}) {
                 className="mx-auto"
             />
             <p>{item.item_name}</p>
-            <p>{item.current_price}</p>
-            <button className="bg-blue-500 rounded-full px-3">Add to cart</button>
+            <p>Price : {item.current_price} ฿</p>
+            <p>In stock : {item.stock_quantity}</p>
         </div>
     );
 }
