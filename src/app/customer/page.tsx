@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 
 import Item from "@/types/Item"
 import CartItem from "@/types/Cart";
-import { getItems } from "@/libs/API/ItemsAPI";
+import { getItems, searchItem } from "@/libs/API/ItemsAPI";
 
 import ItemGrid from "./components/ItemGrid";
 import Popup from "./components/Popup";
 import CartPopup from "./components/CartPopup";
 import CartButton from "./components/CartButton";
+import SearchBar from "./components/SearchBar";
 
 export default function CustomerPage() {
     const [list, setList] = useState<Item[]>([]);
@@ -74,8 +75,26 @@ export default function CustomerPage() {
         setActivePopup(null);
     }
 
+    const checkNULL = (query: string) => {
+        if (query == null || query == '') {
+            return true;
+        }
+        return false;
+    }
+
+    const search = async (query : string) => {
+        if (checkNULL(query)) {
+            return;
+        }
+        const result = await searchItem(query);
+        displayList(result);
+    }
+
     return (
         <div>
+            <SearchBar
+                onSearch={search}
+            />
             <CartButton
                 onOpenCart={() => setActivePopup("CART")}
             />
