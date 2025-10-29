@@ -21,7 +21,7 @@ export default function ItemPane( {
             />
             <p>{item.item_name}</p>
             <p>Price : {item.current_price} ฿</p>
-            <p>In stock : {item.stock_quantity}</p>
+            <p>In stock : {item.stock_quantity - item.reserve_quantity}</p>
         </div>
     );
 }
