@@ -8,13 +8,17 @@ export default function Popup( {
     item,
     cart,
     onClose,
-    onAddItemToCart
+    onAddItemToCart,
+    onRemoveItemFromCart,
+    onCreateOrder
 } : {
     activePopup : "ITEM" | "CART" |null;
     item : Item;
     cart : CartItem[];
     onClose : () => void;
     onAddItemToCart : (item : Item, amount : number) => void;
+    onRemoveItemFromCart : (id : number) => void;
+    onCreateOrder : (cart : CartItem[] , formData : string) => void;
 } ) {
 
     switch (activePopup) {
@@ -32,6 +36,8 @@ export default function Popup( {
                 <CartPopup
                     cart={cart}
                     onCloseCartPopup={onClose}
+                    onRemoveItemFromCart={onRemoveItemFromCart}
+                    onClickCreateOrder={onCreateOrder}
                 />
             );
 

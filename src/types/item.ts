@@ -3,6 +3,7 @@ export default interface Item {
     item_name: string,
     current_price: number,
     size: string,
-    stock_quantity: number
+    stock_quantity: number,
+    reserve_quantity : number,
     status: string
 };

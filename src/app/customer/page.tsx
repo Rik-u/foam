@@ -3,14 +3,18 @@
 import { useState, useEffect } from "react";
 
 import Item from "@/types/Item"
-import CartItem from "@/types/Cart";
+import Order from "@/types/Order";
+import Order_Items from "@/types/Order_Items";
+import useCart from "./hooks/useCart";
 import { getItems, searchItem } from "@/libs/API/ItemsAPI";
+import { postOrder } from "@/libs/API/OrderAPI";
+import { postOrderItems } from "@/libs/API/Order_Items_API";
 
 import ItemGrid from "./components/ItemGrid";
 import Popup from "./components/Popup";
-import CartPopup from "./components/CartPopup";
 import CartButton from "./components/CartButton";
 import SearchBar from "./components/SearchBar";
+import CartItem from "@/types/Cart";
 
 export default function CustomerPage() {
     const [list, setList] = useState<Item[]>([]);
@@ -21,9 +25,10 @@ export default function CustomerPage() {
         current_price: 0,
         size: "",
         stock_quantity: 0,
+        reserve_quantity: 0,
         status: ""
     });
-    const [cart, setCart] = useState<CartItem[]>([]);
+    const { cart, addItemToCart, removeItemFromCart } = useCart();
 
     useEffect(() => {
         const getData = async () => {
@@ -52,27 +57,41 @@ export default function CustomerPage() {
         setActivePopup("ITEM");
     }
 
-    const addItemToCart = (item: Item, amount: number) => {
-        if (amount <= 0)
-            return;
-        
-        setCart(prevCart => {
-            const existingItemIndex = prevCart.findIndex(c => c.item.id === item.id);
-            const updatedCart = [...prevCart];
-
-            if (existingItemIndex >= 0) {
-                updatedCart[existingItemIndex] = {
-                    ...updatedCart[existingItemIndex],
-                    amount: updatedCart[existingItemIndex].amount + amount
-                };
-            } else {
-                updatedCart.push({ item, amount });
-            }
-
-            return updatedCart;
-        });
-
+    const handleAddItemToCart = (item: Item, amount: number) => {
+        addItemToCart(item, amount);
         setActivePopup(null);
+    }
+
+    const handleRemoveItemFromCart = (id : number) => {
+        removeItemFromCart(id);
+    }
+    
+    const handleCheckout = async (cart : CartItem[], address : string) => {
+        try {
+            const newOrder = await postOrder({
+                orderDate: new Date(),
+                address: address,
+                status: "Pending",
+                paymentStatus: "Unpaid" 
+            });
+
+            const orderId = newOrder.orderId
+
+            try {
+                const orderItems = cart.map(cart => ({
+                    orderId : orderId,
+                    itemId : cart.item.id,
+                    quantity : cart.amount,
+                    totalPrice : cart.amount * cart.item.current_price
+                }));
+
+                await postOrderItems(orderItems);
+            } catch (err) {
+                console.error("Items sent failed :", err);
+            }
+        } catch (err) {
+            console.error("Checkout failed :", err);
+        }
     }
 
     const checkNULL = (query: string) => {
@@ -107,7 +126,9 @@ export default function CustomerPage() {
                 item={selectedItem}
                 cart={cart}
                 onClose={() => setActivePopup(null)}
-                onAddItemToCart={addItemToCart}
+                onAddItemToCart={handleAddItemToCart}
+                onRemoveItemFromCart={handleRemoveItemFromCart}
+                onCreateOrder={handleCheckout}
             />
         </div>
     );
