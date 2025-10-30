@@ -35,7 +35,7 @@ export default function ItemPopup( {
                 </div>
                 <p>{item.item_name}</p>
                 <p>Price : {item.current_price} ฿</p>
-                <p>In stock : {item.stock_quantity}</p>
+                <p>In stock : {item.stock_quantity - item.reserve_quantity}</p>
                 <form onSubmit={handleSubmit} className="flex gap-2 mt-2">
                     <input
                         type="number"
