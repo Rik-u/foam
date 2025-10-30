@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Item } from "@/app/admin/types"
+import  Item  from "@/types/Item"
 
 export default function ItemList({ list, onClickItem } : { list : Item[]; onClickItem : (id : number) => void; }) {
     return (
@@ -18,6 +18,7 @@ export default function ItemList({ list, onClickItem } : { list : Item[]; onClic
                     <p>{item.current_price} ฿</p>
                     <p>Size : {item.size}</p>
                     <p>Stock : {item.stock_quantity}</p>
+                    <p>Reserved : {item.reserve_quantity}</p>
                     <p>Status : {item.status}</p>
                 </div>
             ))}

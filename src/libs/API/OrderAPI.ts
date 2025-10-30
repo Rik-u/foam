@@ -37,6 +37,14 @@ export async function updateOrderStatus(orderId : number, status : string) {
     const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: status }),
+        body: JSON.stringify({ status : status }),
+    });
+}
+
+export async function updateOrderTrackingNo(orderId: number, trackingNo : string) {
+    const res = await fetch(`http://localhost:3000/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackingNo : trackingNo }),
     });
 }

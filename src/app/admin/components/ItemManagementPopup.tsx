@@ -5,9 +5,9 @@ import { useState } from "react";
 import AddItemPopup from "./AddItemPopup";
 import ItemDetailPopup from "./ItemDetailPopup";
 import ItemDiscontinueConfirmPopup from "./ItemDiscontinueConfirmPopup";
-import { Item } from "../types";
+import Item from "@/types/Item";
 
-export default function Popup( { 
+export default function ItemManagementPopup({
     activePopup,
     item,
     onClose,
@@ -15,17 +15,17 @@ export default function Popup( {
     onUpdateItem,
     onOpenConfirmPopup,
     onOpenLastItemDetailPopup
-} : {
-    activePopup : "DETAIL" | "ADD" | "CONFIRM" | null;
-    item : Item
-    onClose : () => void;
-    onAddItem : (item: Omit<Item, "id">) => void;
-    onUpdateItem : (item : Item) => void;
-    onOpenConfirmPopup : () => void;
-    onOpenLastItemDetailPopup : () => void;
-} ) {
+}: {
+    activePopup: "DETAIL" | "ADD" | "CONFIRM" | null;
+    item: Item
+    onClose: () => void;
+    onAddItem: (item: Omit<Item, "id">) => void;
+    onUpdateItem: (item: Item) => void;
+    onOpenConfirmPopup: () => void;
+    onOpenLastItemDetailPopup: () => void;
+}) {
 
-    const [discontinueAction, setDiscontinueAction] = useState<(() => void)>(() => {});
+    const [discontinueAction, setDiscontinueAction] = useState<(() => void)>(() => { });
 
     switch (activePopup) {
         case "ADD":

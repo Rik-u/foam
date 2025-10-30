@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { Item } from "@/app/admin/types"
+import  Item  from "@/types/Item"
 
 export default function AddItemPopup({ 
     onCloseNewItemPopup, 
@@ -16,6 +16,7 @@ export default function AddItemPopup({
         current_price: 0,
         size: '',
         stock_quantity: 0,
+        reserve_quantity: 0,
         status: "Active"
     })
 

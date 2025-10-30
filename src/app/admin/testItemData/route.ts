@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const testItemData = [
-        { id: 1, item_name: "Box A", current_price: 10, size: "S", stock_quantity: 10, status: "Active"},
-        { id: 2, item_name: "Box B", current_price: 20, size: "M", stock_quantity: 20, status: "Discontinued"},
-        { id: 3, item_name: "Box C", current_price: 30, size: "L", stock_quantity: 30, status: "Active"},
+        { id: 1, item_name: "Box A", current_price: 10, size: "S", stock_quantity: 10, reserve_quantity: 0, status: "Active"},
+        { id: 2, item_name: "Box B", current_price: 20, size: "M", stock_quantity: 20, reserve_quantity: 0, status: "Discontinued"},
+        { id: 3, item_name: "Box C", current_price: 30, size: "L", stock_quantity: 30, reserve_quantity: 0, status: "Active"},
     ];
 
-var lastId = 3;
+let lastId = 3;
 
 export async function GET() {
     return NextResponse.json(testItemData);

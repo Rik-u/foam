@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { Item } from "@/app/admin/types"
+import  Item from "@/types/Item"
 
 export default function ItemDetailPopup({ 
         item, 
