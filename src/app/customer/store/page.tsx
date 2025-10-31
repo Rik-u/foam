@@ -13,7 +13,7 @@ import Popup from "../components/Popup";
 import CartButton from "../components/CartButton";
 import SearchBar from "../components/SearchBar";
 import CartItem from "@/types/Cart";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/StoreTopBar";
 
 export default function StorePage() {
     const [list, setList] = useState<Item[]>([]);
@@ -70,9 +70,9 @@ export default function StorePage() {
             //Create order and get ID
             const newOrder = await postOrder({
                 orderDate: new Date(),
+                customerId: Number(localStorage.getItem("userId")),
                 address: address,
                 status: "Pending",
-                paymentStatus: "Unpaid"
             });
 
             const orderId = newOrder.orderId

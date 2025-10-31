@@ -6,6 +6,12 @@ export async function getOrders() {
     return data;
 }
 
+export async function getOrdersById(id : number) {
+    const res = await fetch(`http://localhost:3000/testOrderData?id=${id}`);
+    const data = await res.json();
+    return data;
+}
+
 export async function postOrder(order : Omit<Order, "orderId">) {
     const res = await fetch("http://localhost:3000/testOrderData", {
         method : "POST",

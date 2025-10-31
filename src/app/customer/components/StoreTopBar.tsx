@@ -1,7 +1,7 @@
 import Profile from "./Profile";
 import SearchBar from "./SearchBar";
 
-export default function TopBar( { 
+export default function StoreTopBar( { 
     onSearch,
     onClickPfp
 } : { 

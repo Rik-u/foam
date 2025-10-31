@@ -3,27 +3,27 @@ import { NextRequest, NextResponse } from "next/server";
 const testOrderData = [
     {
         orderId : 1,
+        customerId : 1,
         orderDate : new Date(),
         address : "",
         trackingNo : "",
         status : "Awaiting Payment",
-        paymentStatus : ""
     }, 
     {
         orderId: 2,
+        customerId : 1,
         orderDate: new Date(),
         address: "",
         trackingNo: "",
         status: "Paid",
-        paymentStatus: ""
     },
     {
         orderId: 3,
+        customerId : 2,
         orderDate: new Date(),
         address: "",
         trackingNo: "",
         status: "Ready to Ship",
-        paymentStatus: ""
     }
     ];
 
