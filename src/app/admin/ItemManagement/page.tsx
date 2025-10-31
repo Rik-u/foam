@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import Item from "@/types/Item"
+import Item from "@/types/Item";
 import { getItems, postItem, searchItem, updateItem } from "@/libs/API/ItemsAPI";
 
 import ItemList from "../components/ItemList";
