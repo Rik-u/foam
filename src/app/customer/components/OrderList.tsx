@@ -1,12 +1,13 @@
 'use client';
 
 import Order from "@/types/Order";
-import { useState } from "react";
 
 export default function OrderList( { 
     list,
+    onClickOrder
 } : {
     list : Order[];
+    onClickOrder : (id : number) => void;
 } ) {
 
     //TODO : Pull total amount from invoice
@@ -20,8 +21,11 @@ export default function OrderList( {
                     <p>Tracking No. : {order.trackingNo}</p>
                     <p>Status : {order.status}</p>
                     <p>Total Amount : 100</p>
+                    <button className="bg-blue-400 p-2 px-4 mt-2 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500" onClick={() => onClickOrder(order.orderId)}>Pay</button>
                 </div>
+
             ))}
+            
         </div>
     );
 }

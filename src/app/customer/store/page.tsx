@@ -9,9 +9,8 @@ import { postOrder } from "@/libs/API/OrderAPI";
 import { postOrderItems } from "@/libs/API/Order_Items_API";
 
 import ItemGrid from "../components/ItemGrid";
-import Popup from "../components/Popup";
+import StorePopup from "../components/StorePopup";
 import CartButton from "../components/CartButton";
-import SearchBar from "../components/SearchBar";
 import CartItem from "@/types/Cart";
 import TopBar from "../components/StoreTopBar";
 
@@ -127,7 +126,7 @@ export default function StorePage() {
                 items={list}
                 onClickItem={handleOpenItemPopup}
             />
-            <Popup
+            <StorePopup
                 activePopup={activePopup}
                 item={selectedItem}
                 cart={cart}

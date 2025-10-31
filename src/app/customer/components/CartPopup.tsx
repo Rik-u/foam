@@ -71,7 +71,7 @@ export default function CartPopup({
                                 required
                             />
                         </form>
-                        <button type="submit" className="bg-blue-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-green-500">Create Order</button>
+                        <button type="submit" className="bg-blue-400 p-2 px-4 rounded-xl shadow-2xl hover:shadow hover:bg-blue-500">Create Order</button>
                     </div>
                 )}
             </div>
