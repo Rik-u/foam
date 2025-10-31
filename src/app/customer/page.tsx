@@ -110,11 +110,15 @@ export default function CustomerPage() {
         displayList(result);
     }
 
+    const openUserMenu = () => {
+
+    }
+
     return (
         <div>
-            <TopBar/>
-            <SearchBar
-                onSearch={search}
+            <TopBar
+                onSearch={(query : string) => search(query)}
+                onClickPfp={openUserMenu}
             />
             <CartButton
                 onOpenCart={() => setActivePopup("CART")}
