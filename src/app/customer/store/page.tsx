@@ -15,7 +15,7 @@ import SearchBar from "../components/SearchBar";
 import CartItem from "@/types/Cart";
 import TopBar from "../components/TopBar";
 
-export default function CustomerPage() {
+export default function StorePage() {
     const [list, setList] = useState<Item[]>([]);
     const [activePopup, setActivePopup] = useState<"ITEM" | "CART" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item>({

@@ -29,16 +29,16 @@ export default function CustomerMenu() {
             >
                 <div className="mt-16 flex flex-col w-full text-center">
                     <button
-                        onClick={() => goTo('ItemManagement')}
+                        onClick={() => goTo('store')}
                         className="hover:bg-blue-500 p-1 cursor-pointer"
                     >
-                        Items Management
+                        Store
                     </button>
                     <button
-                        onClick={() => goTo('Orders')}
+                        onClick={() => goTo('orders-history')}
                         className="hover:bg-blue-500 p-1 cursor-pointer"
                     >
-                        Orders
+                        Orders History
                     </button>
                 </div>
             </div>
