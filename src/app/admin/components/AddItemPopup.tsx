@@ -14,7 +14,7 @@ export default function AddItemPopup({
     const [newItemFormData, setNewItemFormData] = useState<Omit<Item, "id">>({
         item_name: '',
         current_price: 0,
-        size: '',
+        size: 'S',
         stock_quantity: 0,
         reserve_quantity: 0,
         status: "Active"
@@ -61,6 +61,7 @@ export default function AddItemPopup({
                             <input
                                 type="number"
                                 name="current_price"
+                                min={0}
                                 value={newItemFormData?.current_price}
                                 onChange={handleChange}
                                 placeholder="Price"
@@ -69,7 +70,6 @@ export default function AddItemPopup({
                             />
                         </div>
 
-                        {/* BUG Must select to get value */}
                         <div className="flex flex-col">
                             <label htmlFor="size" className="text-sm font-medium text-gray-700">
                                 Size
@@ -94,6 +94,7 @@ export default function AddItemPopup({
                             <input
                                 type="number"
                                 name="stock_quantity"
+                                min={0}
                                 value={newItemFormData?.stock_quantity}
                                 onChange={handleChange}
                                 placeholder="Stock"

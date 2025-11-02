@@ -40,6 +40,7 @@ export default function ItemPopup( {
                     <input
                         type="number"
                         name="current_price"
+                        min={0}
                         value={formData}
                         onChange={handleChange}
                         placeholder="Price"
