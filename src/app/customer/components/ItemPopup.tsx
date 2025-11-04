@@ -40,7 +40,8 @@ export default function ItemPopup( {
                     <input
                         type="number"
                         name="current_price"
-                        min={0}
+                        min={1}
+                        max={item.stock_quantity - item.reserve_quantity}
                         value={formData}
                         onChange={handleChange}
                         placeholder="Price"
